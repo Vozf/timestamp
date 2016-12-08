@@ -27,6 +27,9 @@ app.get('/:req', function (req, res) {
   }
   res.end(JSON.stringify(obj));
 })
+app.get('/',function(req,res){
+  res.end("Enter value");
+});
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
