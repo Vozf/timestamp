@@ -1,10 +1,31 @@
 
+ var str=require("strftime");
+var express = require('express');
+var app = express();
 
-var express = require('express')
-var app = express()
+  var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
-app.get('/', function (req, res) {
-  res.send('Hello World!')
+app.get('/:req', function (req, res) {
+  console.log(req.params.req);
+  var dat=new Date(+req.params.req);
+  if(dat.toString()==="Invalid Date")
+  dat=new Date(req.params.req);
+  console.log(dat);
+  var obj={
+    "unix":null,
+    "natural":null
+  };
+
+
+
+
+  if(dat.toString()!=="Invalid Date"){
+    obj.unix=dat.getTime();
+    obj.natural=(monthNames[dat.getMonth()]+str(" %d,%Y",dat));
+  }
+  res.end(JSON.stringify(obj));
 })
 
 app.listen(8080, function () {
